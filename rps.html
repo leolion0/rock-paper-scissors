@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+  <meta charset="UTF-8"/>
+</head>
+<body>
+  <script>
+      function computerPlay() {
+        let choices = ["rock", "paper", "scissors"]
+        let randInt = Math.floor(Math.random() * 4)
+        return choices[randInt];
+      }
+      function playRound(playerSelection, computerSelection) {
+          playerSelection = playerSelection.toLowerCase()
+          if (playerSelection == computerSelection) {
+              return "tie"
+          }
+
+          if (playerSelection == "rock") {
+              if (computerSelection == "paper"){
+                  return "You lost! Paper beats rock."
+              }
+              else {
+                  return "You won! Rock beats scissors."
+              }
+          }
+          if (playerSelection == "paper") {
+              if (computerSelection == "scissors") {
+                  return "You lost! Scissors beats paper."
+              }
+              else return "You won! Paper beats rock."
+          }
+          if (playerSelection == "scissors") {
+              if (computerSelection == "rock") {
+                  return "You lost! Rock beats scissors."
+              }
+              else return "You won! Scissors beats paper."
+          }
+          
+          return "Please choose either rock, paper, or scissors."
+      }
+      function game(winsRequired){
+          let playerScore = 0, computerScore = 0;
+          
+            while (true) {
+
+            const playerSelection = prompt("Rock, paper, or scissors?")
+            const computerSelection = computerPlay()
+            let gameResult = playRound(playerSelection, computerSelection)
+
+            console.log(gameResult)
+
+            if (gameResult.includes("won")) playerScore += 1;
+            if (gameResult.includes("lost")) computerScore+= 1;
+
+            let reportScore = `The score is ${playerScore} to ${computerScore}.`
+            console.log(reportScore)
+
+            if (playerScore >= winsRequired  || computerScore > winsRequired) break;
+          }
+          if (playerScore > computerScore) {
+              console.log("You won the match!")
+          }
+          else console.log("You lost the match!")
+      }
+      game(3);
+
+
+  </script>
+</body>
+</html>
